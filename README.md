@@ -3,6 +3,11 @@
 [![license](https://img.shields.io/github/license/jackmuskopf/softy.svg)](https://github.com/jackmuskopf/softy/blob/main/LICENSE)
 
 Soft access of nested data for more readable code
+- Lightweight
+- Pure Python
+- One source file
+- < 150 lines of code
+- No dependencies
 
 
 An item:
