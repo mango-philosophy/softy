@@ -14,6 +14,12 @@ jobs:
     permissions:
       id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
     steps:
+    - name: Install pypa/build
+      run: >-
+        python3 -m
+        pip install
+        build
+        --user
     - name: Build a binary wheel and a source tarball
       run: >-
         python3 -m
