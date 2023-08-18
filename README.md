@@ -11,7 +11,7 @@ Soft access of nested data for more readable code
 
 
 An item:
-```json
+```python
 basket = {
     "Fruits": [
         {
