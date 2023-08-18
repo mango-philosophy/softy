@@ -58,7 +58,7 @@ else:
 After:
 ```python
 import softy
-basket = softy.softy(basket)
+basket = softy.soften(basket)
 
 # get the blanket color
 if basket.Blanket.Color is not softy.null:
