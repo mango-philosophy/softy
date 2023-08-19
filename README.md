@@ -67,7 +67,7 @@ else:
     print('Unspecified blanket color')
 
 # get the color of the third fruit
-if basket.Fruits[3].Color is not softy.null:
+if basket.Fruits[2].Color is not softy.null:
     print(f'3rd fruit color is {fruit_color}')
 else:
     print('Unspecified 3rd fruit color')
