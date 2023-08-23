@@ -8,6 +8,9 @@ from collections.abc import Iterable
 
 class NullMeta(type):
 
+    def __call__(self, *args, **kws):
+        return self
+
     def __repr__(self):
         return 'null'
 
@@ -60,19 +63,6 @@ class SoftyList(list):
     def __get_pydantic_core_schema__(self):
         pydantic_core = importlib.import_module('pydantic_core')
         return pydantic_core.core_schema.any_schema()
-
-    def __getitem__(self, __ix: int):
-        try:
-            item = super().__getitem__(__ix)
-        except IndexError:
-            return null
-        if isinstance(__ix, slice):
-            return soften(item)
-        else:
-            return item
-
-    def __setattr__(self, __name: str, __value: Any) -> None:
-        return super().__setattr__(__name, soften(__value))
     
     def __setitem__(self, __key, __value) -> None:
         if not isinstance(__key, int):
@@ -82,6 +72,14 @@ class SoftyList(list):
         elif __key == len(self):
             return self.append(__value)
         return super().__setitem__(__key, soften(__value))
+
+    def i(self, ix: int):
+        if not isinstance(ix, int):
+            raise TypeError(f'List indices must be integers')
+        if ix >= self.__len__():
+            return null
+        else:
+            return self.__getitem__(ix)
 
     def append(self, item):
         return super().append(soften(item))
@@ -100,12 +98,6 @@ class SoftyMap(dict):
 
     def __getattr__(self, attr):
         return self.get(attr, null)
-
-    def __getitem__(self, __key: Any) -> Any:
-        if __key in self:
-            return super().__getitem__(__key)
-        else:
-            return null
 
     def __setattr__(self, __name: str, __value: Any) -> None:
         return super().__setitem__(__name, soften(__value))

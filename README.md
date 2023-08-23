@@ -67,10 +67,16 @@ else:
     print('Unspecified blanket color')
 
 # get the color of the third fruit
-if basket.Fruits[2].Color is not softy.null:
+if basket.Fruits.i(2).Color is not softy.null:
     print(f'3rd fruit color is {fruit_color}')
 else:
     print('Unspecified 3rd fruit color')
 
-
+# built-in indexing still works the same
+try:
+    wine = basket['Wine']
+except KeyError:
+    print('Forgot the wine')
+else:
+    assert False
 ```
